@@ -18,7 +18,9 @@ const ServicesCard = ({ name, link, description, author, avatar }) => {
                     className="text-blue-500 text-center hover:underline">Leer mas</a>
 
                 </div>
+
             </div>
+
         </div>
     )
 }

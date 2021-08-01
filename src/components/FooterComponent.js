@@ -1,14 +1,18 @@
 import React from 'react'
 import logofooter from 'assets/logo_white_large.png'
 import { PaperClipIcon } from '@heroicons/react/solid'
+import { Link } from 'react-router-dom'
 
 const FooterComponent = () => {
     return (
         <div>
 
-            <footer className="sm:mt-10 pt-10 || bg-blue-900">
+            <footer className=" pt-10 || bg-blue-900">
                 <div>
-                    <img src={logofooter} alt='logo-footer' className='w-40 mx-auto'></img>
+                    <Link to='/'>
+                        <img src={logofooter} alt='logo-footer' className='w-40 mx-auto' />
+                    </Link>
+
                 </div>
                 <div className="flex flex-wrap justify-center || max-w-6xl m-auto || text-gray-800 ">
                     <div className="p-5 w-1/2 sm:w-4/12 md:w-3/12">
@@ -45,7 +49,7 @@ const FooterComponent = () => {
                             Comunidad
                         </div>
 
-                        <label className="block || mb-2 || text-white-700 text-sm font-bold  hidden" for="email">
+                        <label className="block || mb-2 || text-white-700 text-sm font-bold  hidden" htmlFor="email">
                             Email
                         </label>
                         <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="example@react.com" />
