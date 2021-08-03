@@ -9,10 +9,10 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case SET_CURRENT_USER:
-      console.log(action.payload)
       return {
         ...state,
         isAuthenticated: !isEmpty(action.payload),
+        ...localStorage.setItem("user", JSON.stringify(action.payload)),
         user: action.payload,
       };
     case USER_LOADING:

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import Loading from 'components/layout/Loading';
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom';
 
 export default class RoomReview extends Component {
     state = {
@@ -15,9 +16,11 @@ export default class RoomReview extends Component {
             })
     }
     render() {
+        const user  = localStorage.getItem("user")
+        console.log(user.length)
         return (
             this.state.habitacion.length === 0
-                ? <Loading tam='h-screen'/>
+                ? <Loading tam='h-screen' />
                 : <>
                     <div className="min-w-screen min-h-screen bg-blue-300 flex items-center p-5 lg:p-10 overflow-hidden relative">
                         <div className="w-full max-w-6xl rounded-lg bg-white shadow-xl p-10 lg:p-20 mx-auto text-gray-800 relative md:text-left">
@@ -40,9 +43,17 @@ export default class RoomReview extends Component {
                                             <span className="font-bold text-5xl leading-none align-baseline">{this.state.habitacion.price}</span>
                                         </div>
                                         <div className="inline-block align-bottom">
-                                            <button className="bg-blue-800 opacity-75 hover:opacity-100 text-white rounded-full px-10 py-2 font-semibold">
-                                                Reservar
-                                            </button>
+                                            {user.length > 2 
+                                                ? 
+                                                    <Link to='/hello' className="bg-blue-800 opacity-75 hover:opacity-100 text-white rounded-full px-10 py-2 font-semibold">
+                                                        Reservar
+                                                    </Link> 
+                                                : 
+                                                    <Link to='/login' className="bg-blue-800 opacity-75 hover:opacity-100 text-white rounded-full px-10 py-2 font-semibold">
+                                                        Iniciar sesion
+                                                    </Link>
+                                            }
+
                                         </div>
                                     </div>
                                 </div>

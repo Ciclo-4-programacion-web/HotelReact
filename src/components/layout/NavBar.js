@@ -8,6 +8,7 @@ import {
     XIcon,
 } from '@heroicons/react/outline'
 
+
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
@@ -31,7 +32,6 @@ class NavBar extends Component {
 
     render() {
         const { user } = this.props.auth;
-        console.log(user)
         return (
             <>
                 <Popover className="relative bg-white nav z-50">
@@ -146,6 +146,7 @@ class NavBar extends Component {
             </>)
     }
 }
+
 NavBar.propTypes = {
     auth: PropTypes.object.isRequired,
 };
