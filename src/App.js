@@ -18,6 +18,7 @@ import RoomReview from 'components/room/RoomReview';
 import Login from 'pages/auth/Login';
 import NavBar from 'components/layout/NavBar';
 import Register from 'pages/auth/Register';
+import Reservation from 'pages/public/Reservation';
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -48,6 +49,7 @@ class App extends Component {
               <Route exact path="/" component={Home} />
               <Route exact path="/register" component={Register} />
               <Route exact path='/habitacion/:id' component={RoomReview} />
+              <Route exact path='/reservacion' component={Reservation} />
               <Route exact path="/login" component={Login} />
               <PrivateRoute exact path="/profile" component={UserProfile} />
               <Route component={NotFound} />

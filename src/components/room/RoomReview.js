@@ -1,5 +1,6 @@
 import axios from 'axios';
 import Loading from 'components/layout/Loading';
+import ReservationComponent from 'components/reservation/ReservationComponent';
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 
@@ -16,8 +17,7 @@ export default class RoomReview extends Component {
             })
     }
     render() {
-        const user  = localStorage.getItem("user")
-        console.log(user.length)
+        const user  = JSON.parse(localStorage.getItem("user"))
         return (
             this.state.habitacion.length === 0
                 ? <Loading tam='h-screen' />
@@ -43,13 +43,11 @@ export default class RoomReview extends Component {
                                             <span className="font-bold text-5xl leading-none align-baseline">{this.state.habitacion.price}</span>
                                         </div>
                                         <div className="inline-block align-bottom">
-                                            {user.length > 2 
+                                            {user.name 
                                                 ? 
-                                                    <Link to='/hello' className="bg-blue-800 opacity-75 hover:opacity-100 text-white rounded-full px-10 py-2 font-semibold">
-                                                        Reservar
-                                                    </Link> 
+                                                    <ReservationComponent id={this.state.habitacion._id} />
                                                 : 
-                                                    <Link to='/login' className="bg-blue-800 opacity-75 hover:opacity-100 text-white rounded-full px-10 py-2 font-semibold">
+                                                    <Link to='/login' className="bg-blue-800 hover:opacity-70 text-white rounded-full px-10 py-2 font-semibold">
                                                         Iniciar sesion
                                                     </Link>
                                             }

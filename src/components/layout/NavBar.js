@@ -19,7 +19,7 @@ import AcessLink from 'components/profile/AcessLink';
 
 const navigation = [
     { name: 'Dashboard', href: '/crud', icon: CursorClickIcon, },
-    { name: 'Reservar', href: '/reservar', icon: HomeIcon, },
+    { name: 'Reservar', href: '/reservacion', icon: HomeIcon, },
     { name: 'Servicios', href: '/services', icon: HomeIcon, },
     { name: 'Equipo', href: '/team', icon: HomeIcon, },
 ]

@@ -5,11 +5,9 @@ import { Link } from 'react-router-dom';
 
 
 export default class CardRoom extends Component {
-    
     state = {
         habitacion: []
     }
-    
     componentDidMount() {
         axios.get(`http://localhost:4000/api/habitacion/list`)
             .then(res => {
