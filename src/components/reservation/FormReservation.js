@@ -1,9 +1,10 @@
 import axios from 'axios'
 import React, { Component } from 'react'
 import { XIcon } from '@heroicons/react/outline'
+import { withRouter } from 'react-router-dom';
 
 
-export default class FormReservation extends Component {
+class FormReservation extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -23,7 +24,7 @@ export default class FormReservation extends Component {
     changeNumber = () => {
         this.props.setNumber(false)
     }
-    handleSubmit(e) {
+    async handleSubmit(e) {
         e.preventDefault();
         const datos = {
             name: this.state.user.name,
@@ -35,11 +36,15 @@ export default class FormReservation extends Component {
         }
         const options = {
             headers: {token: localStorage.getItem("jwtToken") }
-          };
-        axios.post("http://localhost:4000/api/reservacion/add", datos , options).then(res => {
-            console.log(res);
+        };
+        await axios.post("http://localhost:4000/api/reservacion/add", datos , options).then(res => {
             localStorage.setItem('reserva', JSON.stringify(res.data))
         })
+        await axios.put(`http://localhost:4000/api/habitacion/deactivate/${this.props.id}`, this.props.id , options)
+            .then(res => {
+                console.log(res)
+        })
+        this.props.history.push('/')
         
     }
     render() {
@@ -138,3 +143,4 @@ export default class FormReservation extends Component {
     }
 
 }
+export default withRouter(FormReservation)
