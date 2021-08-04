@@ -1,13 +1,10 @@
-import Rooms from 'components/reservation/hello'
+import Rooms from 'components/reservation/RoomsComponent'
 import React from 'react'
 
 const Reservation = () => {
     return (
-        <div className='flex justify-around items-center'>
-            <Rooms/>
-            <Rooms/>
-            <Rooms/>
-            <Rooms/>
+        <div>
+            <Rooms />
         </div>
     )
 }

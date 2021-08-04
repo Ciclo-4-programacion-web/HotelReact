@@ -27,7 +27,7 @@ export default class RoomReview extends Component {
                             <div className="md:flex items-center -mx-10">
                                 <div className="w-full md:w-1/2 px-10 mb-10 md:mb-0">
                                     <div className="relative">
-                                        <img src="https://images.unsplash.com/photo-1475855581690-80accde3ae2b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" className="w-full relative z-10" alt="" />
+                                        <img src={this.state.habitacion.image} className="w-full relative z-10" alt="" />
                                         <div className="border-4 border-yellow-200 absolute top-10 bottom-10 left-10 right-10 z-0"></div>
                                     </div>
                                 </div>

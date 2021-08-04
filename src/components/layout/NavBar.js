@@ -34,7 +34,7 @@ class NavBar extends Component {
         const { user } = this.props.auth;
         return (
             <>
-                <Popover className="relative bg-white nav z-50">
+                <Popover className="sticky top-0 bg-white nav z-50">
                     {({ open }) => (
                         <>
                             <div className="max-w-7xl mx-auto px-4 sm:px-6">
