@@ -1,8 +1,8 @@
-import axios from 'axios';
 import Loading from 'components/layout/Loading';
-import ReservationComponent from 'components/reservation/ReservationComponent';
+import ReservationComponent from 'components/reservation/ButtonComponent';
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
+import API from 'services/API';
 
 export default class RoomReview extends Component {
     state = {
@@ -10,7 +10,7 @@ export default class RoomReview extends Component {
     }
     componentDidMount() {
         const { match } = this.props;
-        axios.get(`http://localhost:4000/api/habitacion/room/${match.params.id}`)
+        API.get(`habitacion/room/${match.params.id}`)
             .then(res => {
                 const habitacion = res.data;
                 this.setState({ habitacion });

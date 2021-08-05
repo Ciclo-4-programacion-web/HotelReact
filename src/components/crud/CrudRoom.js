@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import { PencilIcon } from '@heroicons/react/outline';
 import { LightBulbIcon } from '@heroicons/react/solid';
+import Loading from 'components/layout/Loading';
+import API from 'services/API';
 
 const Todo = props => (
     <tr>
@@ -56,7 +57,7 @@ export default class TodosList extends Component {
         this.state = { todos: [] };
     }
     async componentDidMount() {
-        await axios.get('http://localhost:4000/api/habitacion/list')
+        await API.get('habitacion/list')
             .then(response => {
                 this.setState({ todos: response.data });
             })
@@ -71,6 +72,9 @@ export default class TodosList extends Component {
     }
     render() {
         return (
+            this.state.todos.length === 0
+            ? <Loading />
+            :
             <div className="flex flex-col">
                 <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">

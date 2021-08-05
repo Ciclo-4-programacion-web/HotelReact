@@ -1,7 +1,7 @@
-import axios from 'axios'
 import React, { Component } from 'react'
 import { XIcon } from '@heroicons/react/outline'
 import { withRouter } from 'react-router-dom';
+import API from 'services/API';
 
 
 class FormReservation extends Component {
@@ -9,9 +9,14 @@ class FormReservation extends Component {
         super(props)
         this.state = {
             user: {},
-            asunto: " "
+            asunto: " ",
+            inicio: new Date("0000-00-00"),
+            fin: new Date("0000-00-00")
+
         };
         this.handleChange = this.handleChange.bind(this);
+        this.handleChangeInicio = this.handleChangeInicio.bind(this);
+        this.handleChangeFin = this.handleChangeFin.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     async componentDidMount() {
@@ -20,6 +25,12 @@ class FormReservation extends Component {
     }
     handleChange(event) {
         this.setState({ asunto: event.target.value });
+    }
+    handleChangeInicio(e) {
+        this.setState( {inicio: e.target.value})
+    }
+    handleChangeFin(e) {
+        this.setState( {fin: e.target.value})
     }
     changeNumber = () => {
         this.props.setNumber(false)
@@ -31,16 +42,16 @@ class FormReservation extends Component {
             email: this.state.user.email,
             subject: this.state.asunto,
             habitacion: this.props.id,
-            start: new Date("2022-01-23"),
-            end: new Date("2022-01-25")
+            start: this.state.inicio,
+            end: this.state.fin
         }
         const options = {
             headers: {token: localStorage.getItem("jwtToken") }
         };
-        await axios.post("http://localhost:4000/api/reservacion/add", datos , options).then(res => {
+        await API.post("reservacion/add", datos , options).then(res => {
             localStorage.setItem('reserva', JSON.stringify(res.data))
         })
-        await axios.put(`http://localhost:4000/api/habitacion/deactivate/${this.props.id}`, this.props.id , options)
+        await API.put(`habitacion/deactivate/${this.props.id}`, this.props.id , options)
             .then(res => {
                 console.log(res)
         })
@@ -107,13 +118,13 @@ class FormReservation extends Component {
                                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="inicio">
                                             Inicio
                                         </label>
-                                        <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="inicio" type="date" />
+                                        <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="inicio" type="date" value={this.state.inicio} onChange={this.handleChangeInicio}/>
                                     </div>
                                     <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="fin">
                                             Fin
                                         </label>
-                                        <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="fin" type="date" />
+                                        <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="fin" type="date" value={this.state.fin} onChange={this.handleChangeFin}/>
                                     </div>
 
                                 </div>

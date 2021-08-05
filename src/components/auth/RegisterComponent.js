@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { registerUser } from "actions/authActions";
 import classnames from "classnames";
 
-import logo from 'assets/people_tax5.svg'
+import logo from 'assets/people_tax6.svg'
 
 class RegisterComponent extends Component {
     constructor() {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import axios from 'axios';
 import Loading from 'components/layout/Loading';
 import { Link } from 'react-router-dom';
+import API from 'services/API';
 
 
 export default class CardRoom extends Component {
@@ -9,7 +9,7 @@ export default class CardRoom extends Component {
         habitacion: []
     }
     async componentDidMount() {
-        await axios.get(`http://localhost:4000/api/habitacion/list`)
+        await API.get(`habitacion/list`)
             .then(res => {
                 const habitacion = res.data;
                 const room = habitacion.filter(room => room.state === true )
