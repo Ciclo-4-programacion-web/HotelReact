@@ -15,7 +15,7 @@ export default class RoomsComponent extends Component {
                 if (this.props.inicio) {
                     let room2 = []
                     if (room.length > 2) {
-                        for (let i = 0; i < 3; i++) {
+                        for (let i = 0; i < 4; i++) {
                             room2[i] = room[i]
                         }
                         this.setState({ habitacion: room2 });

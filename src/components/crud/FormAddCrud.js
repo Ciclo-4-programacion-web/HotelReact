@@ -8,11 +8,13 @@ class FormAddCrud extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            user: {},
-            asunto: " ",
-            inicio: new Date("0000-00-00"),
-            fin: new Date("0000-00-00")
-
+            nombre: "",
+            tipo: "Gold",
+            piso: 0,
+            imagen: "",
+            numero: 0,
+            precio: 0,
+            state: false
         };
         this.onChange = this.onChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,14 +32,22 @@ class FormAddCrud extends Component {
     async handleSubmit(e) {
         e.preventDefault();
         const datos = {
-            name: this.state.user.name,
-            email: this.state.user.email,
-            subject: this.state.asunto,
-            habitacion: this.props.id,
-            start: this.state.inicio,
-            end: this.state.fin
+            name: this.state.nombre,
+            type: this.state.tipo,
+            ubication: this.state.piso,
+            image: this.state.imagen,
+            room_number: this.state.numero,
+            price: this.state.precio,
+            state: this.state.state
         }
-        
+        const options = {
+            headers: { token: localStorage.getItem("jwtToken") }
+        };
+        await API.post("habitacion/add", datos, options)
+            .then(res => {
+                console.log('Ya')
+            })
+        this.props.history.push('/crud')
 
     }
     render() {
@@ -66,24 +76,31 @@ class FormAddCrud extends Component {
                             <form className="w-full max-w-lg p-10" onSubmit={this.handleSubmit}>
                                 <div className="flex flex-wrap -mx-3 mb-6">
                                     <div className="w-full px-3 mb-6 md:mb-0">
-                                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-first-name">
+                                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="nombre">
                                             Nombre
                                         </label>
-                                        <input className="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder='Habitación...' />
+                                        <input className="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="nombre" onChange={this.onChange}
+                                            value={this.state.nombre} type="text" placeholder='Habitación...' />
                                     </div>
                                 </div>
                                 <div className="flex flex-wrap -mx-3 mb-6">
                                     <div className="w-full md:w-1/2 px-3">
-                                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="type">
+                                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="tipo">
                                             Tipo
                                         </label>
-                                        <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="type" type="text" placeholder='Gold...' />
+                                        <select className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="tipo" onChange={this.onChange}
+                                            value={this.state.tipo}>
+                                            <option value='Gold'>Gold</option>
+                                            <option value='Platinium'>Platinium</option>
+                                            <option value='Diamant'>Diamant</option>
+                                        </select>
                                     </div>
                                     <div className="w-full md:w-1/2 px-3">
                                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="piso">
                                             Piso
                                         </label>
-                                        <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type='text' id="piso" placeholder='Piso...' />
+                                        <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type='text' id="piso" onChange={this.onChange}
+                                            value={this.state.piso} placeholder='Piso...' />
                                     </div>
                                 </div>
                                 <div className="flex flex-wrap -mx-3 mb-6">
@@ -91,29 +108,33 @@ class FormAddCrud extends Component {
                                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="imagen">
                                             Imagen
                                         </label>
-                                        <textarea className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="imagen" ></textarea>
+                                        <textarea className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="imagen" onChange={this.onChange}
+                                            value={this.state.imagen}></textarea>
                                     </div>
                                 </div>
                                 <div className="flex flex-wrap -mx-3 mb-2">
                                     <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-number">
+                                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="numero">
                                             Numero
                                         </label>
-                                        <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-number" type="number" placeholder='10000000'/>
+                                        <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="numero" type="number" onChange={this.onChange}
+                                            value={this.state.numero} placeholder='10000000' />
                                     </div>
                                     <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-price">
+                                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="precio">
                                             Precio
                                         </label>
-                                        <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-price" type="number" />
+                                        <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="precio" type="number" onChange={this.onChange}
+                                            value={this.state.precio} />
                                     </div>
                                     <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-state">
+                                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="state">
                                             Estado
                                         </label>
-                                        <select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
-                                            <option>True</option>
-                                            <option>False</option>
+                                        <select className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="state" onChange={this.onChange}
+                                            value={this.state.state}>
+                                            <option value={true}>True</option>
+                                            <option value={false}>False</option>
                                         </select>
                                     </div>
 

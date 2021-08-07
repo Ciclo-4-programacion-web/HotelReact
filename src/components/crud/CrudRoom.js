@@ -19,7 +19,7 @@ const Todo = props => (
             </div>
         </td>
         <td className="px-6 py-4 whitespace-nowrap">
-            <img className="w-12 h-10" src={props.todo.image} alt={props.todo.name}/>
+            <img className="w-12 h-10" src={props.todo.image} alt={props.todo.name} />
         </td>
         <td className="px-6 py-4 whitespace-nowrap">
             <div className="text-sm text-gray-900">{props.todo.type}</div>
@@ -58,9 +58,16 @@ const Todo = props => (
 export default class TodosList extends Component {
     constructor(props) {
         super(props);
-        this.state = { todos: [] };
+        this.state = {
+            todos: [],
+            rol: ''
+        };
     }
     async componentDidMount() {
+        const { rol } = JSON.parse(localStorage.getItem("user"))
+        if (rol) {
+            this.setState({ rol: rol[0].name })
+        }
         await API.get('habitacion/list')
             .then(response => {
                 this.setState({ todos: response.data });
@@ -75,13 +82,19 @@ export default class TodosList extends Component {
         })
     }
     render() {
+        let mostrar
+        if (this.state.rol === 'Admin') {
+            mostrar = <ButtonCrud />
+        }
+        else {
+            mostrar = ''
+        }
         return (
             this.state.todos.length === 0
                 ? <Loading />
                 :
                 <div>
-                    <ButtonCrud />
-
+                    {mostrar}
                     <div className="flex flex-col">
                         <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                             <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
