@@ -47,7 +47,7 @@ const Crud = () => {
         </nav>
       </div>
 
-      <div className="flex-1 md:p-10 bg-gray-200">
+      <div className="flex-1 md:px-10 bg-gray-200">
         <Route path={`${path}/:name`}>
 
           <Item></Item>

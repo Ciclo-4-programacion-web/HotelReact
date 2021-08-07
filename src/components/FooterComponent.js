@@ -7,7 +7,7 @@ const FooterComponent = () => {
     return (
         <div>
 
-            <footer className=" pt-10 || bg-blue-900">
+            <footer className=" pt-10 || nav">
                 <div>
                     <Link to='/'>
                         <img src={logofooter} alt='logo-footer' className='w-40 mx-auto' />

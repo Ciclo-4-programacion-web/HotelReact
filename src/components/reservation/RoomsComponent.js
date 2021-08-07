@@ -12,7 +12,20 @@ export default class RoomsComponent extends Component {
             .then(res => {
                 const habitacion = res.data;
                 const room = habitacion.filter(room => room.state === true)
-                this.setState({ habitacion: room });
+                if (this.props.inicio) {
+                    let room2 = []
+                    if (room.length > 2) {
+                        for (let i = 0; i < 3; i++) {
+                            room2[i] = room[i]
+                        }
+                        this.setState({ habitacion: room2 });
+                    } else {
+                        this.setState({ habitacion: room });
+                    }
+                } else {
+                    this.setState({ habitacion: room });
+                }
+
             })
     }
     render() {

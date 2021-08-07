@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Loading from 'components/layout/Loading';
 import API from 'services/API';
+import ButtonCrud from './ButtonCrud';
 
 const Todo = props => (
     <tr>
@@ -51,20 +52,26 @@ export default class TodosList extends Component {
     }
     componentDidMount() {
         const { rol } = JSON.parse(localStorage.getItem("user"))
-        if (rol[0].name === "Admin") {
-            const options = {
-                headers: { token: localStorage.getItem("jwtToken") }
-            };
-            API.get('reservacion/list', options)
-                .then(response => {
-                    this.setState({ todos: response.data });
-                })
-                .catch(function (error) {
-                    console.log(error)
-                })
+        if (rol) {
+            if (rol[0].name === 'Admin') {
+                const options = {
+                    headers: { token: localStorage.getItem("jwtToken") }
+                };
+                API.get('reservacion/list', options)
+                    .then(response => {
+                        this.setState({ todos: response.data });
+                    })
+                    .catch(function (error) {
+                        console.log(error)
+                    })
+            }else{
+                const reserva = JSON.parse(localStorage.getItem("reserva"))
+                this.setState({ todos: [reserva] });
+            }
+
         } else {
-            const reserva = JSON.parse(localStorage.getItem("reserva"))
-            this.setState({ todos: [reserva] });
+            
+            this.setState({ todos: [] });
         }
     }
     todoList() {
@@ -77,40 +84,43 @@ export default class TodosList extends Component {
             this.state.todos.length === 0
                 ? <Loading />
                 :
-                <div className="flex flex-col">
-                    <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                        <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                            <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                                <table className="min-w-full divide-y divide-gray-200">
-                                    <thead className="bg-gray-50">
-                                        <tr>
-                                            <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Nombre
-                                            </th>
-                                            <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Asunto
-                                            </th>
-                                            <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Piso
-                                            </th>
-                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Numero
-                                            </th>
-                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Inicio
-                                            </th>
-                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Fin
-                                            </th>
-                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Acciones
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody className="bg-white divide-y divide-gray-200">
-                                        {this.todoList()}
-                                    </tbody>
-                                </table>
+                <div>
+                    <ButtonCrud />
+                    <div>
+                        <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                            <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                                <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                                    <table className="min-w-full divide-y divide-gray-200">
+                                        <thead className="bg-gray-50">
+                                            <tr>
+                                                <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    Nombre
+                                                </th>
+                                                <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    Asunto
+                                                </th>
+                                                <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    Piso
+                                                </th>
+                                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    Numero
+                                                </th>
+                                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    Inicio
+                                                </th>
+                                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    Fin
+                                                </th>
+                                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    Acciones
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody className="bg-white divide-y divide-gray-200">
+                                            {this.todoList()}
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>

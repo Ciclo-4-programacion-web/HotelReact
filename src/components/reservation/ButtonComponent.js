@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import FormReservation from "./FormReservation";
 
-export default function ReservationComponent({id}) {
+export default function ButtonComponent({id}) {
   const [number, setNumber] = useState(false)
   return (
     <>

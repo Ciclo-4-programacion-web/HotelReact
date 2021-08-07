@@ -1,5 +1,5 @@
-import RoomReview from 'components/home/CardRoom'
 import ServicesCard from 'components/home/ServicesCard'
+import RoomsComponent from 'components/reservation/RoomsComponent'
 import React from 'react'
 
 const Home = () => {
@@ -30,7 +30,7 @@ const Home = () => {
                         author='Julian Montero'
                         avatar='https://cdn.pixabay.com/photo/2018/08/28/12/41/avatar-3637425_640.png' />
                 </div>
-                <RoomReview/>
+                <RoomsComponent class='' inicio={true}/>
                 
             </div>
         </div>
