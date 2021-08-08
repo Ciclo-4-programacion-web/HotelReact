@@ -2,8 +2,10 @@ import { Component, Fragment } from 'react'
 import { Link } from "react-router-dom";
 import { Popover, Transition } from '@headlessui/react'
 import {
-    HomeIcon,
-    CursorClickIcon,
+    TableIcon,
+    DesktopComputerIcon,
+    UserGroupIcon,
+    ChatAlt2Icon,
     MenuIcon,
     XIcon,
 } from '@heroicons/react/outline'
@@ -18,10 +20,10 @@ import AvatarMenu from 'components/profile/AvatarMenu';
 import AcessLink from 'components/profile/AcessLink';
 
 const navigation = [
-    { name: 'Dashboard', href: '/crud', icon: CursorClickIcon, },
-    { name: 'Reservar', href: '/reservacion', icon: HomeIcon, },
-    { name: 'Servicios', href: '/services', icon: HomeIcon, },
-    { name: 'Equipo', href: '/team', icon: HomeIcon, },
+    { name: 'Dashboard', href: '/crud', icon: TableIcon, },
+    { name: 'Reservar', href: '/reservacion', icon: DesktopComputerIcon, },
+    { name: 'Servicios', href: '/services', icon: ChatAlt2Icon, },
+    { name: 'Equipo', href: '/team', icon: UserGroupIcon, },
 ]
 
 class NavBar extends Component {

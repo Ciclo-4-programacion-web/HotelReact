@@ -4,6 +4,7 @@ import { LightBulbIcon, TrashIcon } from '@heroicons/react/solid';
 import Loading from 'components/layout/Loading';
 import API from 'services/API';
 import ButtonCrud from './ButtonCrud';
+import { notification } from 'components/layout/NotifyComponent';
 
 
 class TodosList extends Component {
@@ -33,12 +34,12 @@ class TodosList extends Component {
         };
         if (state) {
             await API.put(`habitacion/deactivate/${id}`, id, options)
-                .then(res => console.log(res))
+                .then(res => notification.success('El estado ha sido cambiado'))
         } else {
             await API.put(`habitacion/activate/${id}`, id, options)
-                .then(res => console.log(res))
+                .then(res => notification.success('El estado ha sido cambiado'))
         }
-        window.location.reload()
+        setTimeout(() => window.location.reload(), 2500);
 
     }
     async deleteRoom(id) {
@@ -46,23 +47,16 @@ class TodosList extends Component {
             headers: { token: localStorage.getItem("jwtToken") }
         };
         await API.delete(`habitacion/delete/${id}`, options)
-            .then(res => console.log(res))
-        window.location.reload()
+            .then(res => notification.success('La habitacion ha sido eliminada'))
+        setTimeout(() => window.location.reload(), 2500);
     }
     render() {
-        let mostrar
-        if (this.state.rol === 'Admin') {
-            mostrar = <ButtonCrud />
-        }
-        else {
-            mostrar = ''
-        }
         return (
             this.state.todos.length === 0
                 ? <Loading />
                 :
                 <div>
-                    {mostrar}
+                    {this.state.rol === 'Admin' ? <ButtonCrud /> : ''}
                     <div className="flex flex-col">
                         <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                             <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -124,15 +118,19 @@ class TodosList extends Component {
                                                         <div className="text-sm text-gray-900">{room.price}</div>
                                                     </td>
                                                     <td className="px-2 py-4 whitespace-nowrap">
-                                                        <button className="text-white font-bold py-2 px-1 rounded-full">
-                                                            <PencilIcon color='blue' className='w-6 h-6' />
-                                                        </button>
-                                                        <button onClick={() => this.changeState(room._id, room.state)}>
-                                                            <LightBulbIcon className='w-6 h-6' color={room.state ? 'blue' : 'red'} />
-                                                        </button>
-                                                        <button onClick={() => this.deleteRoom(room._id)}>
-                                                            <TrashIcon color='red' className='w-6 h-6' />
-                                                        </button>
+                                                        {this.state.rol === 'Admin'
+                                                            ? <><button className="text-white font-bold py-2 px-1 rounded-full">
+                                                                <PencilIcon color='blue' className='w-6 h-6' />
+                                                                </button>
+                                                                <button onClick={() => this.changeState(room._id, room.state)}>
+                                                                    <LightBulbIcon className='w-6 h-6' color={room.state ? 'blue' : 'red'} />
+                                                                </button>
+                                                                <button onClick={() => this.deleteRoom(room._id)}>
+                                                                    <TrashIcon color='red' className='w-6 h-6' />
+                                                                </button>
+                                                            </>
+                                                            : ''}
+
                                                     </td>
                                                 </tr>
                                             )}

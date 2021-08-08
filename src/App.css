@@ -2,6 +2,10 @@
   background: rgb(54,90,223);
   background: linear-gradient(225deg, rgba(54,90,223,1) 0%, rgba(5,54,121,1) 27%, rgba(14,80,168,0.8757878151260504) 82%);
 }
+.nav-2{
+  background: rgb(54,90,223);
+  background: linear-gradient(25deg, rgba(54,90,223,1) 0%, rgba(5,54,121,1) 27%, rgba(14,80,168,0.8757878151260504) 82%);
+}
 .header{
   background: rgb(5,1,65);
   background: linear-gradient(35deg, rgba(5,1,65,1) 0%, rgba(44,88,147,1) 37%, rgba(19,106,140,1) 100%);

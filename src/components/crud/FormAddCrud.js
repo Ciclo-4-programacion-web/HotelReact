@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { XIcon } from '@heroicons/react/outline'
 import { withRouter } from 'react-router-dom';
 import API from 'services/API';
-
+import {notification} from 'components/layout/NotifyComponent'
 
 class FormAddCrud extends Component {
     constructor(props) {
@@ -45,9 +45,12 @@ class FormAddCrud extends Component {
         };
         await API.post("habitacion/add", datos, options)
             .then(res => {
-                console.log('Ya')
+                notification.success('La habitacion se ha creado')
             })
-        window.location.reload()
+            .catch(res => {
+                notification.error('Error al agregar la habitacion')
+            })
+        setTimeout(() => window.location.reload(), 2500);
 
     }
     render() {
@@ -80,7 +83,7 @@ class FormAddCrud extends Component {
                                             Nombre
                                         </label>
                                         <input className="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="nombre" onChange={this.onChange}
-                                            value={this.state.nombre} type="text" placeholder='Habitación...' />
+                                            value={this.state.nombre} type="text" placeholder='Habitación...' required />
                                     </div>
                                 </div>
                                 <div className="flex flex-wrap -mx-3 mb-6">
@@ -100,7 +103,7 @@ class FormAddCrud extends Component {
                                             Piso
                                         </label>
                                         <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type='text' id="piso" onChange={this.onChange}
-                                            value={this.state.piso} placeholder='Piso...' />
+                                            value={this.state.piso} placeholder='Piso...' required />
                                     </div>
                                 </div>
                                 <div className="flex flex-wrap -mx-3 mb-6">
@@ -118,14 +121,14 @@ class FormAddCrud extends Component {
                                             Numero
                                         </label>
                                         <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="numero" type="number" onChange={this.onChange}
-                                            value={this.state.numero} placeholder='10000000' />
+                                            value={this.state.numero} placeholder='10000000' required />
                                     </div>
                                     <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="precio">
                                             Precio
                                         </label>
                                         <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="precio" type="number" onChange={this.onChange}
-                                            value={this.state.precio} />
+                                            value={this.state.precio} required />
                                     </div>
                                     <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="state">
