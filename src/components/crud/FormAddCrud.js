@@ -47,7 +47,7 @@ class FormAddCrud extends Component {
             .then(res => {
                 console.log('Ya')
             })
-        this.props.history.push('/crud/habitaciones-crud')
+        window.location.reload()
 
     }
     render() {
@@ -92,7 +92,7 @@ class FormAddCrud extends Component {
                                             value={this.state.tipo}>
                                             <option value='Gold'>Gold</option>
                                             <option value='Platinium'>Platinium</option>
-                                            <option value='Diamant'>Diamond</option>
+                                            <option value='Diamond'>Diamond</option>
                                         </select>
                                     </div>
                                     <div className="w-full md:w-1/2 px-3">
@@ -150,7 +150,7 @@ class FormAddCrud extends Component {
                                         Cerrar
                                     </button>
                                     <input
-                                        className="bg-blue-900 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                        className="bg-blue-900 text-white cursor-pointer font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                         type="submit"
                                         value='Agregar'
                                     />
