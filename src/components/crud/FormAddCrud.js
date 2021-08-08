@@ -47,7 +47,7 @@ class FormAddCrud extends Component {
             .then(res => {
                 console.log('Ya')
             })
-        this.props.history.push('/crud')
+        this.props.history.push('/crud/habitaciones-crud')
 
     }
     render() {
@@ -92,7 +92,7 @@ class FormAddCrud extends Component {
                                             value={this.state.tipo}>
                                             <option value='Gold'>Gold</option>
                                             <option value='Platinium'>Platinium</option>
-                                            <option value='Diamant'>Diamant</option>
+                                            <option value='Diamant'>Diamond</option>
                                         </select>
                                     </div>
                                     <div className="w-full md:w-1/2 px-3">

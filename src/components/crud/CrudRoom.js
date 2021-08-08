@@ -1,11 +1,25 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { PencilIcon } from '@heroicons/react/outline';
-import { LightBulbIcon } from '@heroicons/react/solid';
+import { LightBulbIcon, TrashIcon } from '@heroicons/react/solid';
 import Loading from 'components/layout/Loading';
 import API from 'services/API';
 import ButtonCrud from './ButtonCrud';
 
+const changeState = async(id, state) =>{
+    const options = {
+        headers: { token: localStorage.getItem("jwtToken") }
+    };
+    if(state){
+        await API.put(`habitacion/deactivate/${id}`, id, options)
+        .then(res => console.log(res) )
+    }else{
+        await API.put(`habitacion/activate/${id}`, id, options)
+        .then(res => console.log(res) )
+    }
+    window.location.reload()
+
+}
 const Todo = props => (
     <tr>
         <td className="px-4 py-4 whitespace-nowrap">
@@ -35,9 +49,6 @@ const Todo = props => (
         <td className="px-6 py-4 whitespace-nowrap">
             <div className="text-sm text-gray-900">{props.todo.price}</div>
         </td>
-        <td className="px-6 py-4 whitespace-nowrap">
-            <div className="text-sm text-gray-900">{props.todo.state}</div>
-        </td>
         <td className="px-2 py-4 whitespace-nowrap">
             <button className="text-white font-bold py-2 px-1 rounded-full">
                 <Link to={"/edit/" + props.todo._id} >
@@ -46,16 +57,19 @@ const Todo = props => (
                     </span>
                 </Link>
             </button>
-            <button className="text-white font-bold py-2 px-1 rounded-full">
+            <button className="text-white font-bold py-2 px-1 rounded-full" onClick={() => changeState(props.todo._id, props.todo.state)}>
                 <span className="text-black h-6 w-6 text-2xl block outline-none focus:outline-none">
                     <LightBulbIcon color={props.todo.state ? 'blue' : 'red'} />
                 </span>
+            </button>
+            <button>
+                <TrashIcon color='red' className='w-6 h-6'/>
             </button>
         </td>
     </tr>
 )
 
-export default class TodosList extends Component {
+class TodosList extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -121,9 +135,6 @@ export default class TodosList extends Component {
                                                     Precio
                                                 </th>
                                                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    Estado
-                                                </th>
-                                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                     Acciones
                                                 </th>
                                             </tr>
@@ -140,3 +151,4 @@ export default class TodosList extends Component {
         )
     }
 }
+export default TodosList
