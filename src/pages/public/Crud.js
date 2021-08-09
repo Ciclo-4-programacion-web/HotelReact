@@ -36,7 +36,7 @@ const Crud = () => {
           </svg>
         </button>
       </div>
-      <div id='menu' className="sidebar text-blue-100 w-64 space-y-6 py-7 px-2 absolute inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition duration-200 ease-in-out bg-gradient-to-r from-blue-900 to-indigo-900">
+      <div id='menu' className="sidebar text-blue-100 w-64 space-y-6 py-7 px-2 absolute inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition duration-200 ease-in-out nav-2">
         <nav>
           {navigationCrud.map((link) => (
             <Link key={link.name} to={`${url}${link.href}`} aria-current={link.current ? 'page' : undefined} className='block px-4 rounded transition duration-200 hover:bg-blue-700 hover:text-white cursor-pointer py-2.5'

@@ -34,7 +34,7 @@ export default class RoomReview extends Component {
                                 <div className="w-full md:w-1/2 px-10">
                                     <div className="mb-10">
                                         <h1 className="font-bold uppercase text-2xl mb-5">{this.state.habitacion.name} <br />{this.state.habitacion.type}</h1>
-                                        <p className="text-sm">{this.state.habitacion.ubication}
+                                        <p className="text-sm">Piso {this.state.habitacion.ubication}
                                         </p>
                                     </div>
                                     <div>

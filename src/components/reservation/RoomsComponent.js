@@ -33,13 +33,12 @@ export default class RoomsComponent extends Component {
             this.state.habitacion.length === 0
                 ? <Loading tam='h-screen' />
                 : <>
-                    <div className='flex items-center justify-center'>
-                        <div className='holder mx-auto w-10/12 grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4'>
+                        <div className='flex flex-wrap justify-center items-center'>
                             {this.state.habitacion.map(room =>
                                 <div className="wrapper antialiased text-gray-900 my-10 mx-5" key={room._id}>
                                     <div>
 
-                                        <img src={room.image} alt="random imgee" className="object-cover object-center rounded-lg shadow-md h-80" width='420px' />
+                                        <img src={room.image} alt={room.name} className="object-cover object-center rounded-lg shadow-md h-80" width='400px' />
 
                                         <Link to={`/habitacion/${room._id}`}>
                                             <div className="relative px-4 -mt-16">
@@ -69,7 +68,6 @@ export default class RoomsComponent extends Component {
                                 </div>
                             )}
                         </div>
-                    </div>
                 </>
         )
     }

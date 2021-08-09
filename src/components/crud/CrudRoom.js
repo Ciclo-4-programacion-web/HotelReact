@@ -39,7 +39,7 @@ class TodosList extends Component {
             await API.put(`habitacion/activate/${id}`, id, options)
                 .then(res => notification.success('El estado ha sido cambiado'))
         }
-        setTimeout(() => window.location.reload(), 2500);
+        setTimeout(() => window.location.reload(), 1500);
 
     }
     async deleteRoom(id) {
@@ -48,7 +48,7 @@ class TodosList extends Component {
         };
         await API.delete(`habitacion/delete/${id}`, options)
             .then(res => notification.success('La habitacion ha sido eliminada'))
-        setTimeout(() => window.location.reload(), 2500);
+        setTimeout(() => window.location.reload(), 1500);
     }
     render() {
         return (
