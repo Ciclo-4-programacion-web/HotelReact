@@ -6,7 +6,7 @@ import { notification } from "components/layout/NotifyComponent";
 // Register User
 export const registerUser = (userData, history) => (dispatch) => {
   axios
-    .post("http://localhost:4000/api/usuario/register", userData)
+    .post("https://hotel-reactcol.herokuapp.com/api/usuario/register", userData)
     .then((res) => {
       history.push("/login")
       notification.login(true)
@@ -21,7 +21,7 @@ export const registerUser = (userData, history) => (dispatch) => {
 // Login - get user token
 export const loginUser = (userData) => (dispatch) => {
   axios
-    .post("http://localhost:4000/api/usuario/login", userData)
+    .post("https://hotel-reactcol.herokuapp.com/api/usuario/login", userData)
     .then((res) => {
       notification.login(`Bienvenido!`)
       // Set token to localStorage
