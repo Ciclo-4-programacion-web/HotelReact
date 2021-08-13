@@ -52,10 +52,9 @@ function login(success) {
 
     // prompt success toast if login was successfull
     if (success) {
-        toast('Login Successfull! Redirecting...', {
-            position: toast.POSITION.BOTTOM_CENTER,
+        toast('Logeando...', {
+            position: toast.POSITION.TOP_LEFT,
             className: 'toast-success',
-            progressClassName: 'success-progress-bar',
             autoClose: 2000,
             toastId: 1
         });
@@ -63,7 +62,7 @@ function login(success) {
 
     // propmt error toast if login failes
     else {
-        toast('Invalid e-mail or password. Please try again', {
+        toast('Email o contraseña incorrecta.', {
             position: toast.POSITION.BOTTOM_CENTER,
             className: 'toast-error',
             progressClassName: 'error-progress-bar',

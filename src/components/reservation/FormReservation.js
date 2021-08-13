@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { XIcon } from '@heroicons/react/outline'
 import { withRouter } from 'react-router-dom';
 import API from 'services/API';
+import { notification } from 'components/layout/NotifyComponent';
 
 
 class FormReservation extends Component {
@@ -49,7 +50,7 @@ class FormReservation extends Component {
             headers: {token: localStorage.getItem("jwtToken") }
         };
         await API.post("reservacion/add", datos , options).then(res => {
-            localStorage.setItem('reserva', JSON.stringify(res.data))
+            notification.success('Reservacion agregada!')
         })
         await API.put(`habitacion/deactivate/${this.props.id}`, this.props.id , options)
             .then(res => {

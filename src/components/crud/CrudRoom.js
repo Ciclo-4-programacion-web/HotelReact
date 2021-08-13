@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { PencilIcon } from '@heroicons/react/outline';
 import { LightBulbIcon, TrashIcon } from '@heroicons/react/solid';
 import Loading from 'components/layout/Loading';
 import API from 'services/API';
 import ButtonCrud from './ButtonCrud';
 import { notification } from 'components/layout/NotifyComponent';
+import EditCrud from './EditCrud';
 
 
 class TodosList extends Component {
@@ -12,14 +12,14 @@ class TodosList extends Component {
         super(props);
         this.state = {
             todos: [],
-            rol: ''
+            rol: '',
+            abrir: false
         };
     }
     async componentDidMount() {
-        const { rol } = JSON.parse(localStorage.getItem("user"))
-        if (rol) {
-            this.setState({ rol: rol[0].name })
-        }
+        const { rol } = JSON.parse(localStorage.getItem("user")) || ' '
+        rol ? this.setState({ rol: rol[0].name }) : this.setState({ rol: null})
+        
         await API.get('habitacion/list')
             .then(response => {
                 this.setState({ todos: response.data });
@@ -119,16 +119,16 @@ class TodosList extends Component {
                                                     </td>
                                                     <td className="px-2 py-4 whitespace-nowrap">
                                                         {this.state.rol === 'Admin'
-                                                            ? <><button className="text-white font-bold py-2 px-1 rounded-full">
-                                                                <PencilIcon color='blue' className='w-6 h-6' />
-                                                                </button>
+                                                            ? <div className='flex'>
+                                                                
+                                                                <EditCrud room={room}/>
                                                                 <button onClick={() => this.changeState(room._id, room.state)}>
                                                                     <LightBulbIcon className='w-6 h-6' color={room.state ? 'blue' : 'red'} />
                                                                 </button>
                                                                 <button onClick={() => this.deleteRoom(room._id)}>
                                                                     <TrashIcon color='red' className='w-6 h-6' />
                                                                 </button>
-                                                            </>
+                                                            </div>
                                                             : ''}
 
                                                     </td>

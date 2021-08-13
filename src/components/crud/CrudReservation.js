@@ -14,7 +14,7 @@ export default class TodosList extends Component {
         };
     }
     componentDidMount() {
-        const { rol, email } = JSON.parse(localStorage.getItem("user"))
+        const { rol, email } = JSON.parse(localStorage.getItem("user")) || []
         if (rol) {
             this.setState({ rol: rol[0].name })
             if (rol[0].name === 'Admin') {
@@ -115,7 +115,7 @@ export default class TodosList extends Component {
                                                         <div className="text-sm text-gray-900">{room.end.toLocaleString()}</div>
                                                     </td>
                                                     <td className="px-2 py-4 whitespace-nowrap">
-                                                        <button className="text-white font-bold py-2 px-1 rounded-full">
+                                                        <button className="text-white font-bold py-2 px-1 rounded-full" >
                                                             <PencilIcon color='blue' className='w-6 h-6' />
                                                         </button>
                                                         <button onClick={() => this.deleteRoom(room._id, room.habitacion._id)}>

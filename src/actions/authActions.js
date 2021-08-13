@@ -2,12 +2,16 @@ import axios from "axios";
 import setAuthToken from "utils/setAuthToken";
 import jwt_decode from "jwt-decode";
 import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
+import { notification } from "components/layout/NotifyComponent";
 // Register User
 export const registerUser = (userData, history) => (dispatch) => {
   axios
     .post("http://localhost:4000/api/usuario/register", userData)
-    .then((res) => history.push("/login")) // re-direct to login on successful register
-    .catch((err) =>
+    .then((res) => {
+      history.push("/login")
+      notification.login(true)
+    }) // re-direct to login on successful register
+    .catch((err) => 
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data,
@@ -19,8 +23,7 @@ export const loginUser = (userData) => (dispatch) => {
   axios
     .post("http://localhost:4000/api/usuario/login", userData)
     .then((res) => {
-      // Save to localStorage
-      /* console.log(res.data) */
+      notification.login(`Bienvenido!`)
       // Set token to localStorage
       const { token } = res.data;
       localStorage.setItem("jwtToken", token);
