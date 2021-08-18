@@ -8,9 +8,9 @@ export default class RoomReview extends Component {
     state = {
         habitacion: []
     }
-    componentDidMount() {
+    async componentDidMount() {
         const { match } = this.props;
-        API.get(`habitacion/room/${match.params.id}`)
+        await API.get(`habitacion/room/${match.params.id}`)
             .then(res => {
                 const habitacion = res.data;
                 this.setState({ habitacion });
@@ -43,7 +43,7 @@ export default class RoomReview extends Component {
                                             <span className="font-bold text-5xl leading-none align-baseline">{this.state.habitacion.price}</span>
                                         </div>
                                         <div className="inline-block align-bottom">
-                                            {user.name 
+                                            {Object.keys(user).length !== 0
                                                 ? 
                                                     <ReservationComponent id={this.state.habitacion._id} />
                                                 : 

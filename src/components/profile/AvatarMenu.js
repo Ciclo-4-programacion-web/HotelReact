@@ -15,6 +15,7 @@ class AvatarMenu extends Component {
     onLogoutClick = (e) => {
         e.preventDefault();
         this.props.logoutUser();
+        window.location.replace("/")
     };
     render() {
         return (
