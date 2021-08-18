@@ -17,7 +17,7 @@ export default class RoomReview extends Component {
             })
     }
     render() {
-        const user  = JSON.parse(localStorage.getItem("user"))
+        const user  = JSON.parse(localStorage.getItem("user")) || {}
         return (
             this.state.habitacion.length === 0
                 ? <Loading tam='h-screen' />
