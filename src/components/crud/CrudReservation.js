@@ -13,15 +13,15 @@ export default class TodosList extends Component {
             rol: ''
         };
     }
-    componentDidMount() {
-        const { rol, email } = JSON.parse(localStorage.getItem("user")) || []
+    async componentDidMount() {
+        const { rol, email } = JSON.parse(localStorage.getItem("user")) 
         if (rol) {
             this.setState({ rol: rol[0].name })
             if (rol[0].name === 'Admin') {
                 const options = {
                     headers: { token: localStorage.getItem("jwtToken") }
                 };
-                API.get('reservacion/list', options)
+                await API.get('reservacion/list', options)
                     .then(response => {
                         this.setState({ todos: response.data });
                     })
@@ -32,10 +32,10 @@ export default class TodosList extends Component {
                 const options = {
                     headers: { token: localStorage.getItem("jwtToken") }
                 };
-                API.get(`reservacion/list/${email}`, options)
+                await API.get(`reservacion/list/${email}`, options)
                     .then(response => {
-                        console.log(response.data)
                         this.setState({ todos: response.data });
+                        
                     })
                     .catch(function (error) {
                         console.log(error)

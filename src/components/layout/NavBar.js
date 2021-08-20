@@ -4,8 +4,6 @@ import { Popover, Transition } from '@headlessui/react'
 import {
     TableIcon,
     DesktopComputerIcon,
-    UserGroupIcon,
-    ChatAlt2Icon,
     MenuIcon,
     XIcon,
 } from '@heroicons/react/outline'
@@ -21,9 +19,7 @@ import AcessLink from 'components/profile/AcessLink';
 
 const navigation = [
     { name: 'Dashboard', href: '/crud', icon: TableIcon, },
-    { name: 'Reservar', href: '/reservacion', icon: DesktopComputerIcon, },
-    { name: 'Servicios', href: '/services', icon: ChatAlt2Icon, },
-    { name: 'Equipo', href: '/team', icon: UserGroupIcon, },
+    { name: 'Reservar', href: '/reservacion', icon: DesktopComputerIcon, }
 ]
 
 class NavBar extends Component {
